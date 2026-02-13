@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forever With You</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+    background: radial-gradient(circle at bottom, #0f2027, #203a43, #2c5364);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    width: 100%;
+    z-index: 10;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 30px;
+    background-color: #ff4e50;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+#poem {
+    margin-top: 30px;
+    font-size: 18px;
+    white-space: pre-line;
+    min-height: 200px;
+}
+
+/* Stars */
+.star {
+    position: fixed;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.2; }
+    to { opacity: 1; }
+}
+
+/* Floating Hearts */
+.float-heart {
+    position: fixed;
+    bottom: -20px;
+    animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+    to {
+        transform: translateY(-110vh) scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* Rose petals */
+.petal {
+    position: fixed;
+    top: -20px;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Fireworks */
+.firework {
+    position: fixed;
+    font-size: 25px;
+    animation: explode 1s ease-out forwards;
+}
+
+@keyframes explode {
+    to {
+        transform: scale(3);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Click for a Magical Night Message 💌</h2>
+    <button onclick="startExperience()">Click Here</button>
+    <div id="poem"></div>
+</div>
+
+<audio id="bgMusic" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const text = `எப்படி வந்தாய் தெரியல,
+எதுக்கு இந்த உரவுனு  புரியல....😇
+
+எப்போதும் உன்கூட 🫵
+தோள் குடுக்க தோழன🫂,
+அரவனைகிர அப்பாவா💞,
+அன்ப பேசுர அண்ணனா🌜
+உன் தோழன் நா இருக்கேன்.....
+வழி தெரியாம நீ நின்னா கை புடிச்சு 🤝நான் நினைப்பேன்👫 ......
+கஷ்ட முடியும் வர🥹
+ பாதை தெரியும் வர  😇
+ கண்ணிர் துடைக்கும் வர 🥲
+நீ சிரிக்கும் வர☺️ ....
+உன் தோழன் நா இருக்கேன்💫🤜🤛.....
+
+பெண் குழந்தைக்கு தான் தெரியும்🐣
+அப்பாவின் அன்பு எப்படின்னு,
+அந்த அன்பை நான் பெய்த முதல் குழந்தை
+என் தோழி🫂… நீ தான்டி🫵.....
+
+அடுத்தொரு ஜென்மம் இருந்தா
+வாழ்க்கை முழுக்க சேர்ந்து இருக்க
+நிச்சயம் சந்திப்போம்—
+தோளனாக இல்ல
+எண் குழந்தையா நீ பொறக்க🫀.......
+
+காதிரிக்கிரண்🍃........ !!`;
+
+let i = 0;
+let speed = 50;
+
+function startExperience() {
+    document.querySelector("button").style.display = "none";
+    document.getElementById("bgMusic").play();
+    typeWriter();
+}
+
+function typeWriter() {
+    if (i < text.length) {
+        document.getElementById("poem").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, speed);
+    } else {
+        launchFireworks();
+    }
+}
+
+/* Stars */
+for (let i = 0; i < 120; i++) {
+    const star = document.createElement("div");
+    star.classList.add("star");
+    star.style.top = Math.random() * 100 + "vh";
+    star.style.left = Math.random() * 100 + "vw";
+    star.style.animationDuration = (Math.random() * 3 + 1) + "s";
+    document.body.appendChild(star);
+}
+
+/* Floating Hearts */
+const hearts = ["💖","💜","💙","💛","💚","❤️"];
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.classList.add("float-heart");
+    heart.innerHTML = hearts[Math.floor(Math.random()*hearts.length)];
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.fontSize = (Math.random()*20+15)+"px";
+    heart.style.animationDuration = (Math.random()*3+4)+"s";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),6000);
+},400);
+
+/* Rose petals */
+setInterval(() => {
+    const petal = document.createElement("div");
+    petal.classList.add("petal");
+    petal.innerHTML = "🌹";
+    petal.style.left = Math.random()*100 + "vw";
+    petal.style.fontSize = (Math.random()*15+15)+"px";
+    petal.style.animationDuration = (Math.random()*5+5)+"s";
+    document.body.appendChild(petal);
+    setTimeout(()=>petal.remove(),8000);
+},800);
+
+/* Heart burst on click */
+document.addEventListener("click", function(e) {
+    for (let i=0;i<8;i++){
+        const burst=document.createElement("div");
+        burst.innerHTML="💖";
+        burst.style.position="fixed";
+        burst.style.left=e.clientX+"px";
+        burst.style.top=e.clientY+"px";
+        burst.style.transition="1s";
+        document.body.appendChild(burst);
+        setTimeout(()=>{
+            burst.style.left=(e.clientX+(Math.random()*200-100))+"px";
+            burst.style.top=(e.clientY-(Math.random()*200))+"px";
+            burst.style.opacity="0";
+        },10);
+        setTimeout(()=>burst.remove(),1000);
+    }
+});
+
+/* Fireworks */
+function launchFireworks(){
+    for(let i=0;i<20;i++){
+        const fire=document.createElement("div");
+        fire.classList.add("firework");
+        fire.innerHTML="✨";
+        fire.style.left=Math.random()*100+"vw";
+        fire.style.top=Math.random()*80+"vh";
+        document.body.appendChild(fire);
+        setTimeout(()=>fire.remove(),1000);
+    }
+}
+</script>
+
+</body>
+</html>
